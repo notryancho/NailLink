@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CustomerAppointment = ({ user }) => {
@@ -10,7 +10,7 @@ const CustomerAppointment = ({ user }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch nail techs and their services from the backend
@@ -38,7 +38,7 @@ const CustomerAppointment = ({ user }) => {
       })
       .then(() => {
         // Navigate the user to the customer dashboard
-        history.push("/dashboard/customer");
+        navigate.push("/dashboard/customer");
       });
   };
 

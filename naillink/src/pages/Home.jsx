@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LandingPage = () => {
+const Home = () => {
   return (
     <div>
       <h1>Welcome to Nail Tech Booking App</h1>
@@ -18,4 +18,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Home;

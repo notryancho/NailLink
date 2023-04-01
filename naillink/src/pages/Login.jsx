@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isCustomer, setIsCustomer] = useState(false);
   const [isNailTech, setIsNailTech] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Code to send user login data to backend API
     // and redirect user to appropriate dashboard
     if (isCustomer) {
-      history.push('/customer-dashboard');
+      navigate.push('/customer-dashboard');
     } else if (isNailTech) {
-      history.push('/nail-tech-dashboard');
+      navigate.push('/nail-tech-dashboard');
     }
   };
 

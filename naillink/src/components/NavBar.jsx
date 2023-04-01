@@ -14,6 +14,9 @@ const NavBar = () => {
         <li>
           <Link to="/login">Log In</Link>
         </li>
+        <li>
+          <Link to="/customer-dashboard">Customer Dashboard</Link>
+        </li>
         {/* Add more links here */}
       </ul>
     </nav>
