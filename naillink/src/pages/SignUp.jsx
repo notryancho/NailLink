@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -13,9 +13,9 @@ const Signup = () => {
     // Code to send user sign-up data to backend API
     // and redirect user to appropriate dashboard
     if (isCustomer) {
-      navigate.push('/customer-dashboard');
+      navigate('/customer-dashboard');
     } else if (isNailTech) {
-      navigate.push('/nail-tech-dashboard');
+      navigate('/nail-tech-dashboard');
     }
   };
 
@@ -70,3 +70,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
