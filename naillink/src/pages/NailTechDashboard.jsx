@@ -5,7 +5,12 @@ const NailTechDashboard = () => {
   const [nailTech, setNailTech] = useState(null);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/nailtech').then((response) => {
+    const accessToken = localStorage.getItem('accessToken');
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    };
+  
+    axios.get('http://127.0.0.1:5000/nailtech', config).then((response) => {
       setNailTech(response.data);
     });
   }, []);
