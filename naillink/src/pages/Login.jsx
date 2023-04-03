@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import authService from '../services/auth';
+
 
 const LoginPage = () => {
     const [name, setName] = useState('');
@@ -18,7 +18,7 @@ const LoginPage = () => {
       if (isCustomer) {
         navigate('/customer-dashboard');
       } else if (isNailTech) {
-        navigate('/nail-tech-dashboard');
+        navigate('/nailtech-dashboard');
       }
     };
   

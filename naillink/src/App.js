@@ -20,7 +20,7 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('/api/users/me');
+        const res = await axios.get('http://127.0.0.1:5000/user');
         setUser(res.data);
       } catch (err) {
         console.error(err);
@@ -31,7 +31,7 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/users/logout');
+      await axios.post('http://127.0.0.1:5000/user/logout');
       setUser(null);
     } catch (err) {
       console.error(err);

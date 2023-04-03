@@ -1,32 +1,28 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:5000/user';
+const API_URL = 'http://127.0.0.1:5000/';
 
 class AuthService {
-    async Login(email, password) {
-        try {
-          const response = await axios.post(BASE_URL + 'login', {
-            email,
-            password
-          });
-      
-          if (response.data.accessToken) {
-            localStorage.setItem('user', JSON.stringify(response.data));
-          }
-      
-          return response.data;
-        } catch (error) {
-          console.error(error);
-          throw error;
+  Login(email, password) {
+    return axios
+      .post(API_URL + 'login', {
+        email,
+        password
+      })
+      .then(response => {
+        if (response.data.accessToken) {
+          localStorage.setItem('user', JSON.stringify(response.data));
         }
-      }
+        return response.data;
+      });
+  }
 
   Logout() {
     localStorage.removeItem('user');
   }
 
   SignUp(name, email, password, isCustomer, isNailTech) {
-    return axios.post(BASE_URL + 'user', {
+    return axios.post(API_URL + 'user', {
       name,
       email,
       password,
@@ -40,5 +36,4 @@ class AuthService {
   }
 }
 
-const authService = new AuthService();
-export default authService;
+export default new AuthService();
