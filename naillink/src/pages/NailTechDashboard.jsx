@@ -5,7 +5,7 @@ const NailTechDashboard = () => {
   const [nailTech, setNailTech] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/nailtech').then((response) => {
+    axios.get('http://127.0.0.1:5000/nailtech').then((response) => {
       setNailTech(response.data);
     });
   }, []);
@@ -19,7 +19,7 @@ const NailTechDashboard = () => {
       <h1>Welcome, {nailTech.name}!</h1>
       <h2>Your Appointments</h2>
       <ul>
-        {nailTech.appointments.map((appointment) => (
+        {nailTech.appointments && nailTech.appointments.map((appointment) => (
           <li key={appointment.id}>
             {appointment.appt_date} at {appointment.appt_time} with{' '}
             {appointment.customer_name}
@@ -28,7 +28,7 @@ const NailTechDashboard = () => {
       </ul>
       <h2>Your Reviews</h2>
       <ul>
-        {nailTech.reviews.map((review) => (
+        {nailTech.reviews && nailTech.reviews.map((review) => (
           <li key={review.id}>
             <p>Rating: {review.rating}</p>
             <p>Comment: {review.comment}</p>
@@ -41,3 +41,4 @@ const NailTechDashboard = () => {
 };
 
 export default NailTechDashboard;
+

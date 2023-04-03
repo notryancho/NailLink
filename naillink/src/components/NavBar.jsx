@@ -17,6 +17,9 @@ const NavBar = () => {
         <li>
           <Link to="/customer-dashboard">Customer Dashboard</Link>
         </li>
+        <li>
+          <Link to="/nailtech-dashboard">NailTech Dashboard</Link>
+        </li>
         {/* Add more links here */}
       </ul>
     </nav>

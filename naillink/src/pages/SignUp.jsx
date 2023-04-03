@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import auth from '../services/auth';
 
 const Signup = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isCustomer, setIsCustomer] = useState(false);
   const [isNailTech, setIsNailTech] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Code to send user sign-up data to backend API
-    // and redirect user to appropriate dashboard
+    const res = await auth.SignUp(name, email, password, isCustomer, isNailTech);
+    console.log("RES", res);
     if (isCustomer) {
       navigate('/customer-dashboard');
     } else if (isNailTech) {
-      navigate('/nail-tech-dashboard');
+      navigate('/nailtech-dashboard');
     }
   };
 
@@ -23,6 +25,15 @@ const Signup = () => {
     <div>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            required
+          />
+        </label>
         <label>
           Email:
           <input
