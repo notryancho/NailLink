@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import auth from '../services/auth';
+import { authService } from '../services/auth';
+
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -10,16 +11,20 @@ const Signup = () => {
   const [isNailTech, setIsNailTech] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const res = await auth.SignUp(name, email, password, isCustomer, isNailTech);
-    console.log("RES", res);
-    if (isCustomer) {
-      navigate('/customer-dashboard');
-    } else if (isNailTech) {
-      navigate('/nailtech-dashboard');
-    }
-  };
+ const handleSubmit = async (event) => {
+  event.preventDefault();
+  console.log("isCustomer: ", isCustomer);
+  console.log("isNailTech: ", isNailTech);
+  const res = await authService.SignUp(name, email, password, isCustomer, isNailTech);
+
+  console.log("RES", res);
+  if (isCustomer) {
+    navigate('/customer-dashboard');
+  } else if (isNailTech) {
+    navigate('/nailtech-dashboard');
+  }
+};
+
 
   return (
     <div>

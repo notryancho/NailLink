@@ -16,7 +16,8 @@ const NailTechDashboard = () => {
 
   return (
     <div>
-      <h1>Welcome{ nailTech.name && `, ${nailTech.name}`}!</h1>
+      <h1>Welcome{ nailTech && nailTech.name && `, ${nailTech.name}`}!</h1>
+
       <h2>Your Appointments</h2>
       <ul>
         {nailTech.appointments && nailTech.appointments.map((appointment) => (
