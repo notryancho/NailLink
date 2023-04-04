@@ -7,20 +7,20 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isCustomer, setIsCustomer] = useState(false);
-  const [isNailTech, setIsNailTech] = useState(false);
+  const [is_customer, setIsCustomer] = useState(false);
+  const [is_nail_tech, setIsNailTech] = useState(false);
   const navigate = useNavigate();
 
  const handleSubmit = async (event) => {
   event.preventDefault();
-  console.log("isCustomer: ", isCustomer);
-  console.log("isNailTech: ", isNailTech);
-  const res = await authService.SignUp(name, email, password, isCustomer, isNailTech);
+  console.log("isCustomer: ", is_customer);
+  console.log("isNailTech: ", is_nail_tech);
+  const res = await authService.SignUp(name, email, password, is_customer, is_nail_tech);
 
   console.log("RES", res);
-  if (isCustomer) {
+  if (is_customer) {
     navigate('/customer-dashboard');
-  } else if (isNailTech) {
+  } else if (is_nail_tech) {
     navigate('/nailtech-dashboard');
   }
 };
@@ -61,9 +61,9 @@ const Signup = () => {
           Are you a customer?
           <input
             type="checkbox"
-            checked={isCustomer}
+            checked={is_customer}
             onChange={() => {
-              setIsCustomer(!isCustomer);
+              setIsCustomer(!is_customer);
               setIsNailTech(false);
             }}
           />
@@ -72,9 +72,9 @@ const Signup = () => {
           Are you a nail tech?
           <input
             type="checkbox"
-            checked={isNailTech}
+            checked={is_nail_tech}
             onChange={() => {
-              setIsNailTech(!isNailTech);
+              setIsNailTech(!is_nail_tech);
               setIsCustomer(false);
             }}
           />

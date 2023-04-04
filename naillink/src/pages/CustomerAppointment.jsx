@@ -14,12 +14,13 @@ const CustomerAppointment = ({ user }) => {
 
   useEffect(() => {
     // Fetch nail techs and their services from the backend
-    axios.get("/api/nailtechs").then((response) => {
+    axios.get("http://127.0.0.1:5000/nailtech").then((response) => {
+        console.log(response.data)
       setNailTechs(response.data);
     });
 
     // Fetch services from the backend
-    axios.get("/api/services").then((response) => {
+    axios.get("http://127.0.0.1:5000/service").then((response) => {
       setServices(response.data);
     });
   }, []);
@@ -28,7 +29,7 @@ const CustomerAppointment = ({ user }) => {
     event.preventDefault();
     // Create a new appointment by sending a POST request to the backend
     axios
-      .post("/api/appointments", {
+      .post("http://127.0.0.1:5000/appointment", {
         customer_id: user.id,
         nail_tech_id: selectedNailTech,
         appt_date: date,

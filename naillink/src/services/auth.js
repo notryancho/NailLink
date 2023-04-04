@@ -25,13 +25,13 @@ class AuthService {
     localStorage.removeItem('user');
   }
 
-  SignUp(name, email, password, isCustomer, isNailTech) {
+  SignUp(name, email, password, is_customer, is_nail_tech) {
     return axios.post(BASE_URL + 'user', {
       name,
       email,
       password,
-      isCustomer,
-      isNailTech
+      is_customer,
+      is_nail_tech
     });
   }
 

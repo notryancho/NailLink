@@ -20,6 +20,15 @@ const NavBar = () => {
         <li>
           <Link to="/nailtech-dashboard">NailTech Dashboard</Link>
         </li>
+        <li>
+          <Link to="/customer-appointment/:id">Customer Appointment</Link>
+        </li>
+        <li>
+          <Link to="/nailtech-appointment/:id">NailTech Appointment</Link>
+        </li>
+        <li>
+          <Link to="/nailtech/:id">NailTech Profile</Link>
+        </li>
         {/* Add more links here */}
       </ul>
     </nav>
