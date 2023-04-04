@@ -26,13 +26,17 @@ const CustomerAppointment = ({ user }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+    // Format the time to HH:MM:SS format in 24-hour clock
+    const formattedTime = new Date(`01/01/2001 ${time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+  
     // Create a new appointment by sending a POST request to the backend
     axios
       .post("http://127.0.0.1:5000/appointment", {
-        customer_id: user.id,
+        customer_id: user ? user.id : null,
         nail_tech_id: selectedNailTech,
         appt_date: date,
-        appt_time: time,
+        appt_time: formattedTime,
         service_id: selectedService,
         status: "booked",
       })
@@ -94,13 +98,14 @@ const CustomerAppointment = ({ user }) => {
         <div>
           <label htmlFor="time-input">Select a Time:</label>
           <input
-            type="time"
-            id="time-input"
-            value={time}
-            onChange={(event) => setTime(event.target.value)}
-            required
-          />
-        </div>
+    type="time"
+    id="time-input"
+    value={time}
+    onChange={(event) => setTime(event.target.value)}
+    step="1"
+    required
+  />
+</div>
         <button type="submit">Book Appointment</button>
       </form>
     </div>
