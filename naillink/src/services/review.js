@@ -10,7 +10,7 @@ const Review = ({ nailTechId, customerId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/reviews', {
+      await axios.post('http://127.0.0.1:5000/reviews', {
         nailTechId,
         customerId,
         rating,

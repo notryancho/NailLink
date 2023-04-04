@@ -15,10 +15,11 @@ const CustomerDashboard = () => {
   if (!customer) {
     return <div>Loading...</div>;
   }
+  
   console.log(customer)
   return (
     <div>
-    <h1>Welcome, {customer.name}!</h1>
+   <h1>Welcome, {customer && customer.name}!</h1>
       <h2>Your Appointments</h2>
       <ul>
         {customer.appointments && customer.appointments.map((appointment) => (

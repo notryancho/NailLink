@@ -15,7 +15,6 @@ const CustomerAppointment = ({ user }) => {
   useEffect(() => {
     // Fetch nail techs and their services from the backend
     axios.get("http://127.0.0.1:5000/nailtech").then((response) => {
-        console.log(response.data)
       setNailTechs(response.data);
     });
 
@@ -40,6 +39,9 @@ const CustomerAppointment = ({ user }) => {
       .then(() => {
         // Navigate the user to the customer dashboard
         navigate.push("/dashboard/customer");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

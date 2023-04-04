@@ -21,7 +21,7 @@ const NailTechDashboard = () => {
 
   return (
     <div>
-      <h1>Welcome {nailTech.email}</h1>
+      <h1>Welcome {nailTech.name}</h1>
 
       <h2>Your Appointments</h2>
       <ul>
