@@ -13,10 +13,7 @@ const Signup = () => {
 
  const handleSubmit = async (event) => {
   event.preventDefault();
-  console.log("isCustomer: ", is_customer);
-  console.log("isNailTech: ", is_nail_tech);
   const res = await authService.SignUp(name, email, password, is_customer, is_nail_tech);
-
   console.log("RES", res);
   if (is_customer) {
     navigate('/customer-dashboard');

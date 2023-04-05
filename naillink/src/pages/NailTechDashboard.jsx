@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const NailTechDashboard = () => {
+const NailTechDashboard = ({ user }) => {
   const [nailTech, setNailTech] = useState(null);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    };
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem('accessToken');
+  //   const config = {
+  //     headers: { Authorization: `Bearer ${accessToken}` }
+  //   };
   
-    axios.get('http://127.0.0.1:5000/nailtech', config).then((response) => {
-      setNailTech(response.data);
-    });
-  }, []);
+  //   axios.get('http://127.0.0.1:5000/nailtech', config).then((response) => {
+  //     setNailTech(response.data);
+  //   });
+  // }, []);
 
-  if (!nailTech) {
+  if (!user) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h1>Welcome {nailTech.name}</h1>
-
+      <h1>Welcome {user.name}</h1>
       <h2>Your Appointments</h2>
       <ul>
-        {nailTech.appointments && nailTech.appointments.map((appointment) => (
+        {user.appointments && user.appointments.map((appointment) => (
           <li key={appointment.id}>
             {appointment.appt_date} at {appointment.appt_time} with{' '}
             {appointment.customer_name}
@@ -34,7 +33,7 @@ const NailTechDashboard = () => {
       </ul>
       <h2>Your Reviews</h2>
       <ul>
-        {nailTech.reviews && nailTech.reviews.map((review) => (
+        {user.reviews && user.reviews.map((review) => (
           <li key={review.id}>
             <p>Rating: {review.rating}</p>
             <p>Comment: {review.comment}</p>
@@ -47,5 +46,3 @@ const NailTechDashboard = () => {
 };
 
 export default NailTechDashboard;
-
-

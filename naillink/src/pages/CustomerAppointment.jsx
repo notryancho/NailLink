@@ -5,8 +5,10 @@ import axios from "axios";
 const CustomerAppointment = ({ user }) => {
   const [nailTechs, setNailTechs] = useState([]);
   const [selectedNailTech, setSelectedNailTech] = useState("");
+  const [selectedNailTechObj, setSelectedNailTechObj] = useState({});
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState("");
+  const [selectedServiceObj, setSelectedServiceObj] = useState({});
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
@@ -14,40 +16,56 @@ const CustomerAppointment = ({ user }) => {
 
   useEffect(() => {
     // Fetch nail techs and their services from the backend
-    axios.get("http://127.0.0.1:5000/nailtech").then((response) => {
-      setNailTechs(response.data);
-    });
+    axios.get("http://127.0.0.1:5000/all-nailtechs").then((response) => {
+      setNailTechs(response.data)
+    }, []);
 
     // Fetch services from the backend
-    axios.get("http://127.0.0.1:5000/service").then((response) => {
-      setServices(response.data);
+    axios.get("http://127.0.0.1:5000/all-services").then((response) => {
+      setServices(response.data)
     });
   }, []);
 
+  const handleNailTechChange = (event) => {
+    setSelectedNailTech(event.target.value);
+    const selectedNailTechObj = nailTechs.find((nailTech) => nailTech._id.$oid === event.target.value);
+    setSelectedNailTechObj(selectedNailTechObj);
+  };
+
+  const handleServiceChange = (event) => {
+    setSelectedService(event.target.value);
+    const selectedServiceObj = services.find((service) => service._id.$oid === event.target.value);
+    setSelectedServiceObj(selectedServiceObj);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-  
     // Format the time to HH:MM:SS format in 24-hour clock
-    const formattedTime = new Date(`01/01/2001 ${time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-  
+    const formattedTime = new Date(`01/01/2001 ${time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+
     // Create a new appointment by sending a POST request to the backend
     axios
       .post("http://127.0.0.1:5000/appointment", {
-        customer_id: user ? user.id : null,
+        customer_id: user ? user._id.$oid : null,
         nail_tech_id: selectedNailTech,
+        nail_tech_name: selectedNailTechObj.name,
+        service_id: selectedService,
+        service_name: selectedServiceObj.name,
+        service_price: selectedServiceObj.price,
         appt_date: date,
         appt_time: formattedTime,
-        service_id: selectedService,
         status: "booked",
       })
       .then(() => {
         // Navigate the user to the customer dashboard
-        navigate.push("/dashboard/customer");
+        navigate("/customer-dashboard");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  console.log(setSelectedNailTechObj)
 
   return (
     <div>
@@ -57,13 +75,13 @@ const CustomerAppointment = ({ user }) => {
           <label htmlFor="nailtech-select">Select a Nail Technician:</label>
           <select
             id="nailtech-select"
-            onChange={(event) => setSelectedNailTech(event.target.value)}
+            onChange={handleNailTechChange}
             value={selectedNailTech}
             required
           >
             <option value="">Choose a Nail Technician</option>
             {nailTechs.map((nailTech) => (
-              <option key={nailTech.id} value={nailTech.id}>
+              <option key={nailTech._id.$oid} value={nailTech._id.$oid}>
                 {nailTech.name}
               </option>
             ))}
@@ -73,13 +91,13 @@ const CustomerAppointment = ({ user }) => {
           <label htmlFor="service-select">Select a Service:</label>
           <select
             id="service-select"
-            onChange={(event) => setSelectedService(event.target.value)}
+            onChange={handleServiceChange}
             value={selectedService}
             required
           >
             <option value="">Choose a Service</option>
             {services.map((service) => (
-              <option key={service.id} value={service.id}>
+              <option key={service._id.$oid} value={service._id.$oid}>
                 {service.name} (${service.price})
               </option>
             ))}
@@ -95,17 +113,19 @@ const CustomerAppointment = ({ user }) => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="time-input">Select a Time:</label>
-          <input
+        {/* <div>
+  <label htmlFor="time-input">Select a Time:</label>
+  <input
     type="time"
     id="time-input"
     value={time}
     onChange={(event) => setTime(event.target.value)}
     step="1"
     required
+    pattern="\d{2}:\d{2}:\d{2}"
+    placeholder="HH:MM:SS"
   />
-</div>
+</div> */}
         <button type="submit">Book Appointment</button>
       </form>
     </div>

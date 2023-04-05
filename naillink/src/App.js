@@ -43,14 +43,14 @@ const App = () => {
       <Navbar user={user} handleLogout={handleLogout} />
   
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
-        <Route path="/nailtech-dashboard" element={<NailTechDashboard />} />
-        <Route path="/nailtech/:id" element={<NailTechProfile />} />
-        <Route path="/customer-appointment/:id" element={<CustomerAppointment />} />
-        <Route path="/nailtech-appointment/:id" element={<NailTechAppointment />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/customer-dashboard" element={<CustomerDashboard user={user} />} />
+        <Route path="/nailtech-dashboard" element={<NailTechDashboard user={user} />} />
+        <Route path="/nailtech/:id" element={<NailTechProfile user={user} />} />
+        <Route path="/customer-appointment/:id" element={<CustomerAppointment user={user} />} />
+        <Route path="/nailtech-appointment/:id" element={<NailTechAppointment user={user} />} />
       </Routes>
     </div>
   );

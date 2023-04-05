@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authService } from '../services/auth';
 
 
-const LoginPage = () => {
-    const [name, setName] = useState('');
+const LoginPage = ({ setUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [is_customer, setIsCustomer] = useState(false);
-    const [is_nail_tech, setIsNailTech] = useState(false);
     const navigate = useNavigate();
   
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
-      
-      // Code to send user login data to backend API
-      // and redirect user to appropriate dashboard
-      if (is_customer) {
-        navigate('/customer-dashboard');
-      } else if (is_nail_tech) {
+      const response = await authService.Login(email, password);
+      console.log("RESPONSE", response);
+      if (response?.nailtech) {
+        setUser(response.nailtech)
         navigate('/nailtech-dashboard');
+      }
+      if (response?.customer) {
+        setUser(response.customer)
+        navigate('/customer-dashboard');
       }
     };
   
@@ -26,15 +26,6 @@ const LoginPage = () => {
       <div>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              required
-            />
-          </label>
           <label>
             Email:
             <input
@@ -51,28 +42,6 @@ const LoginPage = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
-            />
-          </label>
-          <label>
-            Are you a customer?
-            <input
-              type="checkbox"
-              checked={is_customer}
-              onChange={() => {
-                setIsCustomer(!is_customer);
-                setIsNailTech(false);
-              }}
-            />
-          </label>
-          <label>
-            Are you a nail tech?
-            <input
-              type="checkbox"
-              checked={is_nail_tech}
-              onChange={() => {
-                setIsNailTech(!is_nail_tech);
-                setIsCustomer(false);
-              }}
             />
           </label>
           <button type="submit">Login</button>

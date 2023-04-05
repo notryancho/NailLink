@@ -12,27 +12,27 @@ class NailTechService {
   }
 
   getNailTechAppointments() {
-    return axios.get(API_URL + 'appointments');
+    return axios.get(API_URL + 'appointment');
   }
 
   getNailTechReviews() {
-    return axios.get(API_URL + 'reviews');
+    return axios.get(API_URL + 'review');
   }
 
   getServiceList() {
-    return axios.get(API_URL + 'services');
+    return axios.get(API_URL + 'service');
   }
 
   addService(service) {
-    return axios.post(API_URL + 'services', service);
+    return axios.post(API_URL + 'service');
   }
 
   deleteService(serviceId) {
-    return axios.delete(API_URL + 'services/' + serviceId);
+    return axios.delete(API_URL + 'service/' + serviceId);
   }
 
   updateService(serviceId, data) {
-    return axios.put(API_URL + 'services/' + serviceId, data);
+    return axios.put(API_URL + 'service/' + serviceId, data);
   }
 }
 
