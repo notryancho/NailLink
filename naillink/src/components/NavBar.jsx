@@ -18,7 +18,7 @@ const NavBar = ({ user, handleLogout }) => {
         <li className="nav-item">
           <Link to="/login" className="nav-link">LOG IN</Link>
         </li></> : 
-        <li className="nav-item" onClick={handleLogout}><a href="/" className="nav-link">Log Out</a></li>}
+        <li className="nav-item" onClick={handleLogout}><a href="/" className="nav-link">LOG OUT</a></li>}
         {localStorage.getItem("user") === "customer" && <>
         <li className="nav-item">
           <Link to="/customer-dashboard" className="nav-link">Customer Dashboard</Link>
