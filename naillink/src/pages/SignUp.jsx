@@ -31,7 +31,7 @@ const Signup = () => {
           />
         </label>
         <label>
-          Email:
+          EMAIL:
           <input
             type="email"
             value={email}
