@@ -62,12 +62,13 @@
 }
 
 /* Button */
+/* Button */
 .home-button {
   background-color: #fff;
   color: #1c1c1c;
   border: none;
-  padding: 1rem 2rem;
-  margin-right: 1rem;
+  padding: .5rem 2rem;
+  margin: 0 1rem;
   border-radius: 5px;
   font-size: 1.2rem;
   cursor: pointer;
@@ -76,7 +77,20 @@
 
 .home-button:hover {
   background-color: #e6e6e6;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* Sign up button */
+.home-signup-button {
+  margin-right: 1rem;
+}
+
+/* Log in button */
+.home-login-button {
+  margin-left: 1rem;
+}
+
 
 /* Link */
 .home-link {

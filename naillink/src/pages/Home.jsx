@@ -11,10 +11,10 @@ const Home = () => {
         Book appointments with your favorite nail techs today!
       </p>
       <Link to="/signup">
-        <button className="home-button">Sign Up</button>
-      </Link>
+    <button className="home-button home-signup-button">Sign Up</button>
+    </Link>
       <Link to="/login">
-        <button className="home-button">Log In</button>
+    <button className="home-button home-login-button">Log In</button>
       </Link>
     </div>
   );
