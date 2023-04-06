@@ -35,7 +35,7 @@ const CustomerDashboard = ({ user }) => {
     <div>
       <h1>Welcome, {user && user.name}!</h1>
       <h2>Your Appointments</h2>
-      <Link to="/customer-appointment/:id">Book an Appointment</Link>
+      <Link to="/customer-appointment/:id">Book an Appointment!</Link>
       <ul>
         {appointments &&
           appointments.map((appointment) => (
