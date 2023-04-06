@@ -19,7 +19,7 @@ const Signup = () => {
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1>SIGN UP</h1>
       <form onSubmit={handleSubmit}>
         <label>
           NAME:
@@ -40,7 +40,7 @@ const Signup = () => {
           />
         </label>
         <label>
-          Password:
+          PASSWORD:
           <input
             type="password"
             value={password}
