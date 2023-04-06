@@ -4,7 +4,7 @@ const ReviewCard = ({ review }) => {
   return (
     <div>
       <h3>{review.customer.name}</h3>
-      <p>{review.rating} stars</p>
+      <p>{review.rating} STARS</p>
       <p>{review.comment}</p>
     </div>
   );
