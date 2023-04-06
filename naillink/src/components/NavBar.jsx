@@ -1,39 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-
+import "../App.css";
 
 const NavBar = ({ user, handleLogout }) => {
 
-
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
+    <nav className="navbar">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link to="/" className="nav-link">Home</Link>
         </li>
         {!localStorage.getItem('id') ? 
         <>
-        <li>
-          <Link to="/signup">Sign Up</Link>
+        <li className="nav-item">
+          <Link to="/signup" className="nav-link">Sign Up</Link>
         </li>
-        <li>
-          <Link to="/login">Log In</Link>
+        <li className="nav-item">
+          <Link to="/login" className="nav-link">Log In</Link>
         </li></> : 
-        <li onClick={handleLogout}>Log Out</li>}
+        <li className="nav-item" onClick={handleLogout}><a href="/" className="nav-link">Log Out</a></li>}
         {localStorage.getItem("user") === "customer" && <>
-        <li>
-          <Link to="/customer-dashboard">Customer Dashboard</Link>
+        <li className="nav-item">
+          <Link to="/customer-dashboard" className="nav-link">Customer Dashboard</Link>
         </li>
-        <li>
-          <Link to="/customer/:id">Customer Profile</Link>
+        <li className="nav-item">
+          <Link to="/customer/:id" className="nav-link">Customer Profile</Link>
         </li></>}
          {localStorage.getItem("user") === "nailtech" && <>
-        <li>
-          <Link to="/nailtech-dashboard">NailTech Dashboard</Link>
+        <li className="nav-item">
+          <Link to="/nailtech-dashboard" className="nav-link">NailTech Dashboard</Link>
         </li>
-        <li>
-          <Link to="/nailtech/:id">NailTech Profile</Link>
+        <li className="nav-item">
+          <Link to="/nailtech/:id" className="nav-link">NailTech Profile</Link>
         </li></>}
       </ul>
     </nav>
@@ -41,3 +39,4 @@ const NavBar = ({ user, handleLogout }) => {
 };
 
 export default NavBar;
+

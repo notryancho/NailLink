@@ -65,16 +65,14 @@ const CustomerAppointment = ({ user }) => {
         console.log(error);
       });
   };
-
   return (
-    <div className="customer-appointment">
-      <h2 className="customer-appointment__title">Book an Appointment</h2>
+    <div>
+      <h2>Book an Appointment</h2>
       <form onSubmit={handleSubmit}>
-        <div className="customer-appointment__input-group">
+        <div>
           <label htmlFor="nailtech-select">Select a Nail Technician:</label>
           <select
             id="nailtech-select"
-            className="customer-appointment__select"
             onChange={handleNailTechChange}
             value={selectedNailTech}
             required
@@ -87,11 +85,10 @@ const CustomerAppointment = ({ user }) => {
             ))}
           </select>
         </div>
-        <div className="customer-appointment__input-group">
+        <div>
           <label htmlFor="service-select">Select a Service:</label>
           <select
             id="service-select"
-            className="customer-appointment__select"
             onChange={handleServiceChange}
             value={selectedService}
             required
@@ -104,22 +101,20 @@ const CustomerAppointment = ({ user }) => {
             ))}
           </select>
         </div>
-        <div className="customer-appointment__input-group">
+        <div>
           <label htmlFor="date-input">Select a Date:</label>
           <input
             type="date"
             id="date-input"
-            className="customer-appointment__input"
             value={date}
             onChange={(event) => setDate(event.target.value)}
             required
           />
         </div>
         
-        <button type="submit" className="customer-appointment__submit-button">Book Appointment</button>
+        <button type="submit">Book Appointment</button>
       </form>
     </div>
   );
 };
-
 export default CustomerAppointment;
