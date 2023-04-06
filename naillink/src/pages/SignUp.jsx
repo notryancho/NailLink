@@ -11,17 +11,11 @@ const Signup = () => {
   const [is_nail_tech, setIsNailTech] = useState(false);
   const navigate = useNavigate();
 
- const handleSubmit = async (event) => {
-  event.preventDefault();
-  const res = await authService.SignUp(name, email, password, is_customer, is_nail_tech);
-  console.log("RES", res);
-  if (is_customer) {
-    navigate('/customer-dashboard');
-  } else if (is_nail_tech) {
-    navigate('/nailtech-dashboard');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await authService.SignUp(name, email, password, is_customer, is_nail_tech);
+    navigate('/login');
   }
-};
-
 
   return (
     <div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const NailTechProfile = ({ handleLogout }) => {
-  const [nailTech, setNailTech] = useState(null)
+const CustomerProfile = ({ handleLogout }) => {
+  const [customer, setCustomer] = useState(null)
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -10,14 +10,14 @@ const NailTechProfile = ({ handleLogout }) => {
     bio: '',
   });
 
-  const getNailTech = async () => {
-    axios.get(`http://127.0.0.1:5000/nailtech/${localStorage.getItem('id')}`).then((response) => {
-      setNailTech(response.data.nail_tech);
+  const getCustomer = async () => {
+    axios.get(`http://127.0.0.1:5000/customer/${localStorage.getItem('id')}`).then((response) => {
+      setCustomer(response.data.customer);
     });
   }
 
   useEffect(() => {
-    getNailTech()
+    getCustomer()
   }, []);
 
   const handleInputChange = (event) => {
@@ -29,7 +29,7 @@ const NailTechProfile = ({ handleLogout }) => {
   };
 
   const handleDelete = async () => {
-    axios.delete(`http://127.0.0.1:5000/nailtech/${localStorage.getItem('id')}`).then((response) => {
+    axios.delete(`http://127.0.0.1:5000/customer/${localStorage.getItem('id')}`).then((response) => {
       console.log(response)
       handleLogout()
     });
@@ -38,29 +38,29 @@ const NailTechProfile = ({ handleLogout }) => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     checkForm()
-    axios.put(`http://127.0.0.1:5000/nailtech/${localStorage.getItem('id')}`, formState).then((response) => {
+    axios.put(`http://127.0.0.1:5000/customer/${localStorage.getItem('id')}`, formState).then((response) => {
       setFormState({name: '',
       email: '',
       phone: '',
       bio: '',})
-      getNailTech()
+      getCustomer()
     });
   };
 
-   const checkForm = () => {
-    if (formState.name === '') formState.name = nailTech.name;
-    if (formState.email === '') formState.email = nailTech.email;
-    if (formState.phone === '') formState.phone = nailTech.phone;
-    if (formState.bio === '') formState.bio = nailTech.bio;
+  const checkForm = () => {
+    if (formState.name === '') formState.name = customer.name;
+    if (formState.email === '') formState.email = customer.email;
+    if (formState.phone === '') formState.phone = customer.phone;
+    if (formState.bio === '') formState.bio = customer.bio;
   }
 
-  if (!nailTech) {
+  if (!customer) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h1>{nailTech.name}'s Profile</h1>
+      <h1>{customer.name}'s Profile</h1>
       <form onSubmit={handleFormSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
@@ -68,7 +68,7 @@ const NailTechProfile = ({ handleLogout }) => {
             type="text"
             name="name"
             id="name"
-            value={formState.name === '' ? nailTech.name : formState.name}
+            value={formState.name === '' ? customer.name : formState.name}
             onChange={handleInputChange}
           />
         </div>
@@ -78,7 +78,7 @@ const NailTechProfile = ({ handleLogout }) => {
             type="email"
             name="email"
             id="email"
-            value={formState.email === '' ? nailTech.email : formState.email}
+            value={formState.email === '' ? customer.email : formState.email}
             onChange={handleInputChange}
           />
         </div>
@@ -88,7 +88,7 @@ const NailTechProfile = ({ handleLogout }) => {
             type="tel"
             name="phone"
             id="phone"
-            value={formState.phone === '' ? nailTech.phone : formState.phone}
+            value={formState.phone === '' ? customer.phone : formState.phone}
             onChange={handleInputChange}
           />
         </div>
@@ -97,7 +97,7 @@ const NailTechProfile = ({ handleLogout }) => {
           <textarea
             name="bio"
             id="bio"
-            value={formState.bio === '' ? nailTech.bio : formState.bio}
+            value={formState.bio === '' ? customer.bio : formState.bio}
             onChange={handleInputChange}
           />
         </div>
@@ -118,5 +118,5 @@ const NailTechProfile = ({ handleLogout }) => {
   );
 };
 
-export default NailTechProfile;
+export default CustomerProfile;
 

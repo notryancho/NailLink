@@ -45,15 +45,16 @@ const CustomerAppointment = ({ user }) => {
 
     // Create a new appointment by sending a POST request to the backend
     axios
-      .post("http://127.0.0.1:5000/appointment", {
+      .post("http://127.0.0.1:5000/all-appointments", {
         customer_id: user ? user._id.$oid : null,
+        customer_name: user.name,
         nail_tech_id: selectedNailTech,
         nail_tech_name: selectedNailTechObj.name,
-        service_id: selectedService,
-        service_name: selectedServiceObj.name,
-        service_price: selectedServiceObj.price,
         appt_date: date,
         appt_time: formattedTime,
+        service_id: selectedService,
+        service_name: selectedServiceObj.name,
+        service_price: selectedServiceObj.price.toString(),
         status: "booked",
       })
       .then(() => {
@@ -64,8 +65,6 @@ const CustomerAppointment = ({ user }) => {
         console.log(error);
       });
   };
-
-  console.log(setSelectedNailTechObj)
 
   return (
     <div>
@@ -113,19 +112,7 @@ const CustomerAppointment = ({ user }) => {
             required
           />
         </div>
-        {/* <div>
-  <label htmlFor="time-input">Select a Time:</label>
-  <input
-    type="time"
-    id="time-input"
-    value={time}
-    onChange={(event) => setTime(event.target.value)}
-    step="1"
-    required
-    pattern="\d{2}:\d{2}:\d{2}"
-    placeholder="HH:MM:SS"
-  />
-</div> */}
+        
         <button type="submit">Book Appointment</button>
       </form>
     </div>

@@ -2,21 +2,32 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const NailTechDashboard = ({ user }) => {
-  const [nailTech, setNailTech] = useState(null);
+  const [appointments, setAppointments] = useState(null);
 
-  // useEffect(() => {
-  //   const accessToken = localStorage.getItem('accessToken');
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${accessToken}` }
-  //   };
-  
-  //   axios.get('http://127.0.0.1:5000/nailtech', config).then((response) => {
-  //     setNailTech(response.data);
-  //   });
-  // }, []);
+  const getAppointments = async () => {
+    axios.get('http://127.0.0.1:5000/all-appointments').then((response) => {
+      const customerAppointments = response.data.filter((appt) => {
+        return appt?.nail_tech_id?.$oid === localStorage.getItem('id')
+      })
+      setAppointments(customerAppointments);
+    });
+  }
+
+  useEffect(() => {
+    getAppointments()
+  }, []);
 
   if (!user) {
     return <div>Loading...</div>;
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:5000/appointment/${id}`)
+    } catch (err) {
+      console.error(err)
+    }
+    getAppointments()
   }
 
   return (
@@ -24,14 +35,17 @@ const NailTechDashboard = ({ user }) => {
       <h1>Welcome {user.name}</h1>
       <h2>Your Appointments</h2>
       <ul>
-        {user.appointments && user.appointments.map((appointment) => (
-          <li key={appointment.id}>
-            {appointment.appt_date} at {appointment.appt_time} with{' '}
-            {appointment.customer_name}
-          </li>
+        {appointments && appointments.map((appointment) => (
+          <>
+            <li key={appointment._id.$oid}>
+              {appointment.appt_date.$date} at {appointment.appt_time} with{' '}
+              {appointment.customer_name} for {appointment.service_name}
+            </li>
+            <button onClick={() => handleDelete(appointment._id.$oid)}>Cancel</button>
+            </>
         ))}
       </ul>
-      <h2>Your Reviews</h2>
+      {/* <h2>Your Reviews</h2>
       <ul>
         {user.reviews && user.reviews.map((review) => (
           <li key={review.id}>
@@ -40,7 +54,7 @@ const NailTechDashboard = ({ user }) => {
             <p>By: {review.customer_name}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

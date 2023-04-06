@@ -24,6 +24,26 @@ class AuthService {
     }
   }
 
+  async CheckSession(email) {
+    try {
+      const response = await axios.post(BASE_URL + 'user', {
+        email,
+      });
+      if (response?.data?.nailtech) {
+        localStorage.setItem('id', response.data.nailtech._id.$oid)
+      }
+      if (response?.data?.existing_user) {
+        localStorage.setItem('id', response.data.exisiting_user._id.$oid)
+      }
+      if (response?.data?.customer) {
+        localStorage.setItem('id', response.data.customer._id.$oid)
+      }
+      return response.data
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   Logout() {
     localStorage.removeItem('user');
   }

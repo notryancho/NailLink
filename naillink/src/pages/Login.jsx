@@ -11,12 +11,15 @@ const LoginPage = ({ setUser }) => {
     const handleSubmit = async (event) => {
       event.preventDefault();
       const response = await authService.Login(email, password);
-      console.log("RESPONSE", response);
       if (response?.nailtech) {
+        localStorage.setItem('user', "nailtech")
+        localStorage.setItem('email', response.nailtech.email)
         setUser(response.nailtech)
         navigate('/nailtech-dashboard');
       }
       if (response?.customer) {
+        localStorage.setItem('user', "customer")
+        localStorage.setItem('email', response.customer.email)
         setUser(response.customer)
         navigate('/customer-dashboard');
       }

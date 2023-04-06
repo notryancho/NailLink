@@ -5,17 +5,30 @@ import { Link } from 'react-router-dom';
 const CustomerDashboard = ({ user }) => {
   const [appointments, setAppointments] = useState(null);
 
-  useEffect(() => {
+  const getAppointments = async () => {
     axios.get('http://127.0.0.1:5000/all-appointments').then((response) => {
       const customerAppointments = response.data.filter((appt) => {
-        return appt.customer_id.$oid === localStorage.getItem('id')
+        return appt?.customer_id?.$oid === localStorage.getItem('id')
       })
       setAppointments(customerAppointments);
     });
+  }
+
+  useEffect(() => {
+    getAppointments()
   }, []);
 
   if (!user) {
     return <div>Loading...</div>;
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:5000/appointment/${id}`)
+    } catch (err) {
+      console.error(err)
+    }
+    getAppointments()
   }
 
   return (
@@ -26,10 +39,13 @@ const CustomerDashboard = ({ user }) => {
       <ul>
         {appointments &&
           appointments.map((appointment) => (
+            <>
             <li key={appointment._id.$oid}>
               {appointment.appt_date.$date} at {appointment.appt_time} with{' '}
-              {appointment.nail_tech_name}
+              {appointment.nail_tech_name} for ${appointment.service_price}
             </li>
+            <button onClick={() => handleDelete(appointment._id.$oid)}>Cancel</button>
+            </>
           ))}
       </ul>
       {/* <h2>Your Reviews</h2>
