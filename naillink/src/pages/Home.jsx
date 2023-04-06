@@ -6,7 +6,7 @@ import '../App.css';
 const Home = () => {
   return (
     <div className="home-container">
-      <h1 className="home-title">Welcome to NailLink</h1>
+      <h1 className="home-title">Welcome to NailLink!</h1>
       <p className="home-description">
         Book appointments with your favorite nail techs today!
       </p>
