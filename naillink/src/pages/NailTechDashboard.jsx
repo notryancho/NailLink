@@ -45,16 +45,7 @@ const NailTechDashboard = ({ user }) => {
             </>
         ))}
       </ul>
-      {/* <h2>Your Reviews</h2>
-      <ul>
-        {user.reviews && user.reviews.map((review) => (
-          <li key={review.id}>
-            <p>Rating: {review.rating}</p>
-            <p>Comment: {review.comment}</p>
-            <p>By: {review.customer_name}</p>
-          </li>
-        ))}
-      </ul> */}
+    
     </div>
   );
 };
