@@ -32,7 +32,7 @@ const NailTechDashboard = ({ user }) => {
 
   return (
     <div>
-      <h1>Welcome {user.name}</h1>
+      <h1>Welcome, {user.name}!</h1>
       <h2>Your Appointments</h2>
       <ul>
         {appointments && appointments.map((appointment) => (
