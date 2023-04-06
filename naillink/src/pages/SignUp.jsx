@@ -22,7 +22,7 @@ const Signup = () => {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Name:
+          NAME:
           <input
             type="text"
             value={name}
