@@ -113,7 +113,7 @@ const NailTechProfile = ({ handleLogout }) => {
         </div> */}
         <button type="submit">Save Changes</button>
       </form>
-      <button onClick={handleDelete}>Delete Profile</button>
+      <button onClick={handleDelete}>DELETE Profile</button>
     </div>
   );
 };
